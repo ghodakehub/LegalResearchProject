@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-01-28T14:11:42 IST" name="Default suite" finished-at="2025-01-28T14:12:31 IST" duration-ms="48686">
+    <groups>
+    </groups>
+    <test started-at="2025-01-28T14:11:42 IST" name="Default test" finished-at="2025-01-28T14:12:31 IST" duration-ms="48686">
+      <class name="TestClass.LR_EditProfilePageTest">
+        <test-method is-config="true" signature="launchbrowser()[pri:0, instance:TestClass.LR_EditProfilePageTest@5bf0d49]" started-at="2025-01-28T14:11:42 IST" name="launchbrowser" finished-at="2025-01-28T14:11:45 IST" duration-ms="2407" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchbrowser -->
+        <test-method signature="LR_EditProfile()[pri:0, instance:TestClass.LR_EditProfilePageTest@5bf0d49]" started-at="2025-01-28T14:11:45 IST" name="LR_EditProfile" finished-at="2025-01-28T14:12:30 IST" duration-ms="45177" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- LR_EditProfile -->
+        <test-method is-config="true" signature="aftermethod(org.testng.ITestResult)[pri:0, instance:TestClass.LR_EditProfilePageTest@5bf0d49]" started-at="2025-01-28T14:12:30 IST" name="aftermethod" finished-at="2025-01-28T14:12:31 IST" duration-ms="1043" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=LR_EditProfile status=SUCCESS method=LR_EditProfilePageTest.LR_EditProfile()[pri:0, instance:TestClass.LR_EditProfilePageTest@5bf0d49] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- aftermethod -->
+      </class> <!-- TestClass.LR_EditProfilePageTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
