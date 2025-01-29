@@ -1,11 +1,15 @@
 package PomClass;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -39,7 +43,7 @@ public class VerifySearchResult extends BaseLib{
 // Actions 	
 	public void SearhResultverify(WebDriver driver) throws InterruptedException {
 	
-		Library.threadSleep(1000);
+		Library.threadSleep(2000);
 		
 		Library.sendKeys(driver,searchbox , "Enter the keyword in searchbar", "the");
 		test.info("Enter THE keyword in searchbar");
@@ -48,10 +52,11 @@ public class VerifySearchResult extends BaseLib{
 		test.info("click on search Button");
 		Library.threadSleep(6000);
 
-
-		WebElement Notification = driver.findElement(By.xpath("//*[@id=\"material4\"]"));
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+		//WebElement Notification = driver.findElement(By.xpath("//*[@id=\"material4\"]"));
+		WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"material4\"]")));
 		Library.threadSleep(2000);
-        if (Notification.isDisplayed()) {
+        if (element.isDisplayed()) {
                System.out.println("Search Result working fine");
             test.pass("Search Result working properly");
         } else {

@@ -87,7 +87,7 @@ public static ExtentReports extent;
 			
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
+	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 	            	    "LIBIL Website Down Alert ",
 	            	    "LIBIL website not working please check may be server error , please find the attached screenshot for details." ,
 	            	    screenshot,testUrl

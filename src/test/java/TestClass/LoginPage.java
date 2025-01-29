@@ -14,7 +14,6 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import ConfigurationPath.PathFile;
 import ExtentReportBasic.ExtentReportManager;
-import PomClass.LRLOGIN;
 import PomClass.Login;
 import UtilityClass.UtilityClass;
 import generic.BaseLib;
@@ -59,8 +58,6 @@ public class LoginPage {
 	
 	{
 		BaseLib.driver.get(PathFile.LRURL);
-		Thread.sleep(2000);
-		tcid="1: verify Login test case of LR Login page";
 		log.login("pratiksha.damodar@legitquest.com","lq@123");
 		//test1.pass("Login TestCase is passed successfully.");
 		

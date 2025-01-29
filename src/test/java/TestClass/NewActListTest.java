@@ -66,7 +66,7 @@ public class NewActListTest {
 		
 		
 		
-		BaseLib.driver.get("https://login.legitquest.com/?redirectUrl=https%3A%2F%2Fwww.legitquest.com%2Fhome&baseurl=https://www.legitquest.com/");
+		BaseLib.driver.get(PathFile.LRURL);
 		 String pageTitle = BaseLib.driver.getTitle();
 		 System.out.println("page title is" +pageTitle);
 		log.login("pratiksha.damodar@legitquest.com","lq@123");
@@ -89,7 +89,7 @@ public class NewActListTest {
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 	            	    "LR NEWACTLIST ",
 	            	    "Please check NewActList not wokring Showing Blank Page, please find the attached screenshot for details." ,
 	            	    screenshot,testUrl

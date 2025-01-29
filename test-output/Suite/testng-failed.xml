@@ -6,6 +6,13 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
+      <class name="TestClass.LR_EditProfilePageTest">
+        <methods>
+          <include name="LR_EditProfile"/>
+          <include name="aftermethod"/>
+          <include name="launchbrowser"/>
+        </methods>
+      </class> <!-- TestClass.LR_EditProfilePageTest -->
       <class name="TestClass.Lr_ChangePassTest">
         <methods>
           <include name="launchbrowser"/>

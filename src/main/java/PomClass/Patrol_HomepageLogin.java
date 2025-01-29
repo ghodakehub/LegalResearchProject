@@ -66,10 +66,11 @@ public class Patrol_HomepageLogin extends BaseLib {
 		Library.threadSleep(2000);
 
 		test.info("Click on login button: ");
-		Thread.sleep(2000);
+		
 		
      	
      	WebElement dashboardElement = driver.findElement(By.xpath("//*[@id=\"userDropdown\"]/span"));
+     	
         if (dashboardElement.isDisplayed()) {
             test.pass("Patrol Login successfully, valid user is displayed on home page");
         } else {

@@ -86,7 +86,7 @@ public class Patrol_LoginTest {
 		
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
+	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 	            	    "Patrol LOGIN PAGE ",
 	            	    "Please check issue On patrol Login Page , please find the attached screenshot for details." ,
 	            	    screenshot,testUrl

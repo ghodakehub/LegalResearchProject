@@ -1,11 +1,15 @@
 package PomClass;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
 
@@ -53,8 +57,9 @@ public class Patrol_Login  extends BaseLib{
 		test.info("Click on login button: ");
 		Thread.sleep(2000);
 		
+		
+     WebElement dashboardElement = driver.findElement(By.xpath("//*[@id=\"userDropdown\"]/span"));
      	
-     	WebElement dashboardElement = driver.findElement(By.xpath("//*[@id=\"userDropdown\"]/span"));
         if (dashboardElement.isDisplayed()) {
             test.pass("Patrol Login successfully, valid user is displayed on home page");
         } else {

@@ -90,7 +90,7 @@ public static ExtentReports extent;
 				
 				String testUrl = BaseLib.driver.getCurrentUrl();  
 				 ForMultiplemailReceipent.sendEmail(
-		            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
+		            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 		            	    "Legiquest Website Down Alert ",
 		            	    "Legitquest (LR) website not working please check may be server error , please find the attached screenshot for details." ,
 		            	    screenshot, testUrl

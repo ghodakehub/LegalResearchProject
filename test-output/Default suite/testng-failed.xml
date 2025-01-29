@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.searchresultsofLR">
+      <class name="TestClass.Lr_ChangePassTest">
         <methods>
+          <include name="LR_Changepassword"/>
           <include name="launchbrowser"/>
           <include name="aftermethod"/>
-          <include name="LRsearchResult"/>
         </methods>
-      </class> <!-- TestClass.searchresultsofLR -->
+      </class> <!-- TestClass.Lr_ChangePassTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -83,7 +83,7 @@ public class Patrol_HomepageLoginTest {
 			
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver , new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+	            	   BaseLib.driver , new String[]{"ghodake6896@gmail.com"},
 	            	    "PATROL HOME PAGE ",
 	            	    "Please check issue coming on patrol home page , please find the attached screenshot for details." ,
 	            	    screenshot, testUrl

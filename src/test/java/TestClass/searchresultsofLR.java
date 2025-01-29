@@ -63,11 +63,7 @@ public class searchresultsofLR {
 	
 	{
 		
-		
-		
-		BaseLib.driver.get("https://login.legitquest.com/?redirectUrl=https%3A%2F%2Fwww.legitquest.com%2Fhome&baseurl=https://www.legitquest.com/");
-		 String pageTitle = BaseLib.driver.getTitle();
-		 System.out.println("page title is" +pageTitle);
+		BaseLib.driver.get(PathFile.LRURL);
 		log.login("pratiksha.damodar@legitquest.com","lq@123");
 		//Thread.sleep(1000);
 		results.SearhResultverify(BaseLib.driver);
