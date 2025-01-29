@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.NewActListTest">
+      <class name="TestClass.searchresultsofLR">
         <methods>
-          <include name="NewActList"/>
-          <include name="aftermethod"/>
           <include name="launchbrowser"/>
+          <include name="aftermethod"/>
+          <include name="LRsearchResult"/>
         </methods>
-      </class> <!-- TestClass.NewActListTest -->
+      </class> <!-- TestClass.searchresultsofLR -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

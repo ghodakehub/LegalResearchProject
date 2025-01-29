@@ -88,7 +88,7 @@ public class searchresultsofLR {
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 	            	    "LR SEARCH RESULT",
 	            	    "Please check LR search result not wokring shwoing zeor Result, please find the attached screenshot for details." ,
 	            	    screenshot,testUrl

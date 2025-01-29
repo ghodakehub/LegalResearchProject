@@ -50,8 +50,8 @@ public class VerifySearchResult extends BaseLib{
 
 
 		WebElement Notification = driver.findElement(By.xpath("//*[@id=\"material4\"]"));
+		Library.threadSleep(2000);
         if (Notification.isDisplayed()) {
-        	Library.threadSleep(2000);
                System.out.println("Search Result working fine");
             test.pass("Search Result working properly");
         } else {

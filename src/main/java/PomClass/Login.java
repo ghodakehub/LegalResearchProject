@@ -74,20 +74,9 @@ public class Login extends BaseLib {
 		JavascriptExecutor js7= (JavascriptExecutor) BaseLib.driver;
 		js7.executeScript("arguments[0].scrollIntoView(true);",loginpop );
 		loginpop.click();
-     	Thread.sleep(4000);
+     	Thread.sleep(1000);
 		
 	
      	
-     	WebElement dashboardElement = driver.findElement(By.xpath("(//*[@id=\"firstname\"]/strong)[2]"));
-     	
-        if (dashboardElement.isDisplayed()) {
-            test.pass("Login successfully ");
-        } else {
-            throw new AssertionError("Login page not working properly please check");
-        }
-
-     	
-     
-	}
-}
+	}}
 

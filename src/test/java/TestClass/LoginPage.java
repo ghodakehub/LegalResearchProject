@@ -81,7 +81,7 @@ public class LoginPage {
 			
 			 String testUrl = BaseLib.driver.getCurrentUrl();  // Get the URL where the failure occurred
 			 ForMultiplemailReceipent.sendEmail(
-	            	    BaseLib.driver, new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+	            	    BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 	            	    "LR LOGIN PAGE ",
 	            	    "Please check issue coming on LR LOGIN page, please find the attached screenshot for details." ,
 	            	    screenshot , testUrl
