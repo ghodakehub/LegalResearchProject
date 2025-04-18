@@ -21,96 +21,55 @@ import ConfigurationPath.PathFile;
 import ExtentReportBasic.ExtentReportManager;
 import UtilityClass.UtilityClass;
 import generic.BaseLib;
+import generic.EmailUtility;
 import generic.ForMultiplemailReceipent;
+import generic.Library;
 
 
-public class LR_HomePage {
-	
-	BaseLib base;
-	UtilityClass utility1;
-	String FrontpageOFweb;
-	PathFile urlpath;
-	
-	
-	
-public static ExtentReports extent;
-	
-	public static ExtentSparkReporter spark;
-	
-	public static ExtentTest test1;
-	
-	@BeforeClass
-	public void launchbrowser()
-	{
-		ExtentReportManager.initializeExtentReports();
-
-        // Create a new test for this class
-        test1 = ExtentReportManager.extent.createTest("verify LR Home page ");
-
-		base= new BaseLib();
-		base.initailizbrowser();
-		base.implicitwait(10);
-		utility1=new UtilityClass();
-	}
+public class LR_HomePage extends BaseLib {
 		
 	
 		@Test
 	    public void verifyHomePageofLR() {
 			
-			BaseLib.driver.get("https://login.legitquest.com/?redirectUrl=https%3A%2F%2Fwww.legitquest.com%2Fhome&baseurl=https://www.legitquest.com/");
+			BaseLib.driver.get("https://www.legitquest.com/");
 	        try {
 	           
 	            String pageTitle = BaseLib.driver.getTitle();
 	            Assert.assertTrue(pageTitle != null && !pageTitle.isEmpty(), "Website is accessible and page title is retrieved");
-	        } catch (TimeoutException e) {
-	            System.err.println("The website took too long to load. It might be down.");
-	            Assert.fail("Website is not accessible due to a timeout.");
-	            test1.fail("Website is not accessible due to a timeout.");
-	        } catch (NoSuchSessionException e) {
-	            System.err.println("The browser session is not available. It could indicate the website is down.");
-	            test1.fail("Browser session was closed unexpectedly.");
-	            Assert.fail("Browser session was closed unexpectedly.");
-	        } catch (Exception e) {
-	            System.err.println("An unexpected error occurred: " + e.getMessage());
-	            Assert.fail("Website is not accessible due to an unexpected error.");
-	            test1.fail("Website is not accessible due to an unexpected error");
+	           Library.verifyText(driver, "500 Server", "issue on homepage");
+	            
+	            if (!generic.Library.errorUrls.isEmpty()) {
+		            System.out.println("Lr home page verification");
+		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR Home Page error");
+		            if (!generic.Library.errorUrls.isEmpty()) {
+		                System.out.println("Lr edit page verification failed.");
+		                generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR Home page error");
+
+		                String[] recipients = {
+		                    "ghodake6896@gmail.com"
+		                };
+
+		                EmailUtility.sendSummaryEmailWithScreenshots(
+		                    driver,
+		                    recipients,
+		                    "LR Automation - LR Home Page",
+		                    "Please check Issue coming on LR home page. See the attached screenshot and failed URLs below.",
+		                    generic.Library.errorUrls,
+		                    generic.Library.screenshotBytesList
+		                );
+
+		                Assert.fail("Test Case Failed: LR Home page contains errors.");
+		            } else {
+		                System.out.println(" LR home Page Verified Successfully!");
+		            }
+		        }
 	        }
-	    }
-
-
-		@AfterMethod()
-		public void aftermethod(ITestResult result) throws  IOException, MessagingException
-		{
-			if(result.getStatus()== ITestResult.FAILURE)
-			{
-				test1.log(Status.FAIL, "test case is failed"+result.getName());
-				test1.log(Status.FAIL, "test case is failed"+result.getThrowable());
-				String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,result.getName() );
-			
-				test1.log(Status.FAIL,"test"+ test1.addScreenCaptureFromPath(screenshot));
-				String testUrl = BaseLib.driver.getCurrentUrl();  
-				
-				 ForMultiplemailReceipent.sendEmail(
-		            	  BaseLib.driver , new String[]{"ghodake6896@gmail.com"},
-		            	    "LR HOME PAGE ",
-		            	    "Please check issue coming on LR home page, please find the attached screenshot for details." ,
-		            	    screenshot, testUrl
-		            	   
-		            	);
-			
-			
-			}
-			
-			else if(result.getStatus()== ITestResult.SKIP){
-				
-				
-				test1.log(Status.SKIP, "test case is skipped"+result.getName());
-				
-
-			}ExtentReportManager.flushReports(); // Flush the report
-	    
-			BaseLib.driver.quit();	
-			}
-
-	
+	        catch(Exception e)
+	        {
+	        	System.out.println();
+	        }
+		}
 }
+
+		

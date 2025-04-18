@@ -9,11 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 import com.aventstack.extentreports.ExtentTest;
 
 import generic.BaseLib;
+import io.qameta.allure.Allure;
 
-public class Libil_Login extends BaseLib {
+public class Libil_Login {
 
 	WebDriver driver;
-	ExtentTest test;
+	
 
 	@FindBy(xpath = "//input[@id='email']")
 
@@ -29,20 +30,18 @@ public class Libil_Login extends BaseLib {
 	private WebElement admindashboardtitle;
 
 
-    public Libil_Login (WebDriver driver, ExtentTest test) {
+    public Libil_Login (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
+      
         PageFactory.initElements(driver, this);
     }    
 	
     public void login(String user, String pass) throws InterruptedException {
 
     	MaildAddress.sendKeys(user);
-		test.info("Entered mailaddress: " + user);
-		//pwd.clear();
-		//test.info("Clear password: " + pass);
+    	Thread.sleep(1000);
 		pwd.sendKeys(pass);
-		test.info("Entered Password: " + pass);
+		
 		Thread.sleep(2000);
 		
 		
@@ -55,14 +54,13 @@ public class Libil_Login extends BaseLib {
 		Thread.sleep(1000);
 		element.click();
 	
-		test.info("Click on login button: ");
 		Thread.sleep(2000);
 		
      	
 
      	WebElement dashboardElement = driver.findElement(By.xpath("/html/body/header/div/div/h4"));
         if (dashboardElement.isDisplayed()) {
-            test.pass("Libil Login page working successfully");
+            Allure.step("Libil login successful");
         } else {
             throw new AssertionError(" Admin user is not displayed on home page may be Libil login page not working please check.");
         }

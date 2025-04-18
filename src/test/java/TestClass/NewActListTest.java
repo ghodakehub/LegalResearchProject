@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.mail.MessagingException;
 
+import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -20,93 +21,45 @@ import PomClass.Login;
 import PomClass.NewActList;
 import UtilityClass.UtilityClass;
 import generic.BaseLib;
+import generic.EmailUtility;
 import generic.ForMultiplemailReceipent;
 
-public class NewActListTest {
-
-	NewActList act;
-    Login log;
-	BaseLib base;
-	UtilityClass utility;
-	String FrontpageOFweb;
-	PathFile urlpath;
-	
-	  public static ExtentReports extent;
-		
-		public static ExtentSparkReporter spark;
-		
-		public static ExtentTest test;
-		
-		
-	
-	@BeforeClass
-	public void launchbrowser()
-	{
-		ExtentReportManager.initializeExtentReports();
-
-        // Create a new test for this class
-        test = ExtentReportManager.extent.createTest("Test NewActList LR_Website");
-		
-		base= new BaseLib();
-		base.initailizbrowser();
-		base.implicitwait(6);
-		//base.driver.get(PathFile.LRURL);
-		log= new Login(BaseLib.driver, test);
-		act=new NewActList(BaseLib.driver, test);
-		utility= new UtilityClass();
-		
-	}
-	
-
-	
-	@Test
-	public void NewActList() throws InterruptedException, IOException
-	
-	{
-		
-		
-		
-		BaseLib.driver.get(PathFile.LRURL);
-		 String pageTitle = BaseLib.driver.getTitle();
-		 System.out.println("page title is" +pageTitle);
-		log.login("pratiksha.damodar@legitquest.com","lq@123");
-		//Thread.sleep(1000);
-		act.Actlist(BaseLib.driver);
-		act.verifyNewActlsit(BaseLib.driver);
+public class NewActListTest extends BaseLib{
+			
+			
+			@Test
+			public void NewActList() throws InterruptedException, IOException, MessagingException
+			
+			{
+					
+					
+					BaseLib.driver.get(PathFile.LRURL);
+					Login log = new Login(driver);
+					log.login("pratiksha.damodar@legitquest.com","lq@123");
+					NewActList act= new NewActList(driver);
+		act.Actlist(driver);
+		act.verifyNewActlsit(driver);
 		
 	}
 	
 	@AfterMethod()
 	public void aftermethod(ITestResult result) throws  IOException, MessagingException
 	{
-		if(result.getStatus()== ITestResult.FAILURE)
-		{
-			test.log(Status.FAIL, "test case is failed"+result.getName());
-			test.log(Status.FAIL, "test case is failed"+result.getThrowable());
-			String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,result.getName() );
-		
-			test.log(Status.FAIL,"test"+ test.addScreenCaptureFromPath(screenshot));
-			String testUrl = BaseLib.driver.getCurrentUrl();  
-			
-			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
-	            	    "LR NEWACTLIST ",
-	            	    "Please check NewActList not wokring Showing Blank Page, please find the attached screenshot for details." ,
-	            	    screenshot,testUrl
-	            	   );
-		
-		}
-		
-		else if(result.getStatus()== ITestResult.SKIP){
-			
-			
-			test.log(Status.SKIP, "test case is skipped"+result.getName());
-			
+		 if (!generic.Library.errorUrls.isEmpty()) {
+	        	String[] recipients = {
+	            	    "ghodake6896@gmail.com", 
+	            	    
+	            	};
 
-		}ExtentReportManager.flushReports(); // Flush the report
-    
-		BaseLib.driver.quit();	
-		}
-
+	            EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients, 
+	            	    "LR Automation - ChangePassword",
+	            	    "Please check issue coming on LR changepassword page , see the attached screenshot for details", 
+	            	  generic. Library.errorUrls, 
+	            	  generic.  Library. screenshotBytesList);
+	            Assert.fail("Test Case Failed: LR login page");
+	        } else {
+	            //System.out.println("Lr login page open successfully");
+	        }
+	    }
 
 }

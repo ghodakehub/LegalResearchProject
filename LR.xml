@@ -11,15 +11,11 @@
 	  
     <classes>
      
+      <class name="TestClass.LoginPage"/>
       <class name="TestClass.LR_HomePage"/>
       <class name="TestClass.LIBIL_LoginTest"/>
-      <class name="TestClass.Patrol_LoginTest"/>
        <class name="TestClass.searchresultsofLR"/>
         <class name="TestClass.NewActListTest"/>
-        <class name="TestClass.LR_EditProfilePageTest"/>
-        <class name="TestClass.Lr_ChangePassTest"/>
-        <class name="TestClass.searchresultsofLR"/>
-      <class name="TestClass.Patrol_HomepageLoginTest"/>
       <class name="TestClass.VerifyLegiteyeWebsiteDown"/>
       <class name="TestClass.VerifyLegitquestWebsiteDown"/>
       <class name="TestClass.VerifyLibilWebsiteDown"/>

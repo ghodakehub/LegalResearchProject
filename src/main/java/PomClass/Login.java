@@ -7,22 +7,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
-import org.testng.Reporter;
 
-import com.aventstack.extentreports.ExtentTest;
 
 import generic.BaseLib;
 import generic.SwitchWindow;
 
-public class Login extends BaseLib {
+
+public class Login  {
 	
 	WebDriver driver;
-	ExtentTest test;
 
-    public Login (WebDriver driver, ExtentTest test) {
+
+    public Login (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
         PageFactory.initElements(driver, this);
     }    
 
@@ -40,10 +37,10 @@ public class Login extends BaseLib {
 	@FindBy(xpath = "//*[@id=\"indiviual_form\"]/div/div[2]/div/div/input")
 	private WebElement pwd;
 
-	@FindBy(xpath = "//*[@id=\"indiviual_form\"]/div/div[3]/button")
+	@FindBy(xpath = "(//button[contains(@type,'submit')][normalize-space()='Take me in!'])[1]")
 	private WebElement lgbtn;
 		
-	@FindBy(xpath = "/html/body/div[3]/div/div/div[3]/button[2]")
+	@FindBy(xpath = "//button[normalize-space()='Login']")
 	private WebElement loginpop;
 
 	
@@ -75,19 +72,18 @@ public class Login extends BaseLib {
 		
 
 		lgbtn1.click(); // login button for home page first
-		test.info("Click on first login button of home page of .com ");
+		
 		Thread.sleep(3000);
 		lgbtn2.click(); // login button for home page second
-		test.info("Click on login button of LR");
-		Thread.sleep(3000);
+				Thread.sleep(3000);
 
 		// Window switch
-		SwitchWindow.switchWindowByIndex(BaseLib.driver, 1);
+	SwitchWindow.switchWindowByIndex(driver, 1);
 		Thread.sleep(3000);
 		
 		username.sendKeys(user);
 		
-		test.info("Enter username");
+		
 		Thread.sleep(1000);
 		pwd.sendKeys(pass);
 		Thread.sleep(1000);
@@ -98,7 +94,7 @@ public class Login extends BaseLib {
 		js7.executeScript("arguments[0].scrollIntoView(true);",loginpop );
 		loginpop.click();
 	
-		
+		generic.Library.verifyText(driver, "500 server", "error on lr Loginpage");
 
 	}
 }

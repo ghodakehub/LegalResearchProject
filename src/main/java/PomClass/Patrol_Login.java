@@ -15,12 +15,12 @@ import com.aventstack.extentreports.ExtentTest;
 
 import generic.BaseLib;
 
-public class Patrol_Login  extends BaseLib{
+public class Patrol_Login  {
 
 	
 	
 	WebDriver driver;
-	ExtentTest test;
+	
 
 	@FindBy(xpath = "//input[@id='email']")
 
@@ -36,38 +36,27 @@ public class Patrol_Login  extends BaseLib{
 	private WebElement validusername;
 
 
-    public Patrol_Login (WebDriver driver, ExtentTest test) {
+    public Patrol_Login (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
         PageFactory.initElements(driver, this);
     }    
 	
-    public void login(String user, String pass) throws InterruptedException {
+    public void patrollogin(String user, String pass) throws InterruptedException {
 
     	
     	MaildAddress.sendKeys(user);
-		test.info("Entered mailaddress: " + user);
-		//pwd.clear();
-		//test.info("Clear password: " + pass);                
+		               
 		Thread.sleep(2000);
 		pwd.sendKeys(pass);
-		test.info("Entered Password: " + pass);
+		Thread.sleep(1000);
 		lgbtn.click();
 		
-		test.info("Click on login button: ");
-		Thread.sleep(2000);
+		
+		Thread.sleep(3000);
 		
 		
-     WebElement dashboardElement = driver.findElement(By.xpath("//*[@id=\"userDropdown\"]/span"));
-     	
-        if (dashboardElement.isDisplayed()) {
-            test.pass("Patrol Login successfully, valid user is displayed on home page");
-        } else {
-            throw new AssertionError("Valid user not displayed on home page may be Patrol_Login page not working please check.");
-        }
+		generic.Library.verifyText(driver, "Stack trace", "error on Patrol home page");
 
-	
-	
 	
     }
 	

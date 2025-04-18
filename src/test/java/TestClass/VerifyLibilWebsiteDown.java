@@ -21,33 +21,7 @@ import generic.BaseLib;
 import generic.ForMultiplemailReceipent;
 
 public class VerifyLibilWebsiteDown extends BaseLib {
-	BaseLib base;
-	UtilityClass utility;
-	String FrontpageOFweb;
-	PathFile urlpath;
 	
-	
-public static ExtentReports extent;
-	
-	public static ExtentSparkReporter spark;
-	
-	public static ExtentTest test;
-	
-	@BeforeClass
-	public void launchbrowser()
-	{
-		ExtentReportManager.initializeExtentReports();
-
-        // Create a new test for this class
-        test = ExtentReportManager.extent.createTest("LIBIL Website Down Alert Test");
-
-		base= new BaseLib();
-		base.initailizbrowser();
-		base.implicitwait(10);
-		
-		utility= new UtilityClass();
-		
-	}
 	
 	
 	@Test
@@ -79,15 +53,14 @@ public static ExtentReports extent;
 	{
 		if(result.getStatus()== ITestResult.FAILURE)
 		{
-			test.log(Status.FAIL, "test case is failed"+result.getName());
-			test.log(Status.FAIL, "test case is failed"+result.getThrowable());
+			
 			String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,result.getName() );
 		
-			test.log(Status.FAIL,"test"+ test.addScreenCaptureFromPath(screenshot));
+		
 			
 			String testUrl = BaseLib.driver.getCurrentUrl();  
 			 ForMultiplemailReceipent.sendEmail(
-	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
+	            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
 	            	    "LIBIL Website Down Alert ",
 	            	    "LIBIL website not working please check may be server error , please find the attached screenshot for details." ,
 	            	    screenshot,testUrl
@@ -100,7 +73,6 @@ public static ExtentReports extent;
 		else if(result.getStatus()== ITestResult.SKIP){
 			
 			
-			test.log(Status.SKIP, "test case is skipped"+result.getName());
 			
 
 		}ExtentReportManager.flushReports(); // Flush the report

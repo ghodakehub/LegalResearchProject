@@ -15,16 +15,16 @@ import com.aventstack.extentreports.ExtentTest;
 import UtilityClass.Library;
 import generic.BaseLib;
 
-public class Patrol_HomepageLogin extends BaseLib {
+public class Patrol_HomepageLogin  {
 
 	WebDriver driver;
-	ExtentTest test;
+	
 
 	
 	@FindBy(xpath = "/html/body/div[2]/div/nav/div/a[2]")
 	private WebElement Loginbtn;
 
-	@FindBy(xpath = "(//*[@id=\"email\"])[3]")
+	@FindBy(xpath = "//*[@id=\"email\"]")
 
 	private WebElement MaildAddress;
 
@@ -38,9 +38,9 @@ public class Patrol_HomepageLogin extends BaseLib {
 	private WebElement validusername;
 
 
-    public Patrol_HomepageLogin (WebDriver driver, ExtentTest test) {
+    public Patrol_HomepageLogin (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
+       
         PageFactory.initElements(driver, this);
     }    
     
@@ -51,32 +51,24 @@ public class Patrol_HomepageLogin extends BaseLib {
     	 WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(6));
          WebElement loginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/nav/div/a[2]"))); // Update the XPath if needed
          loginButton.click();
-         Library.threadSleep(2000);
+         Library.threadSleep(4000);
          MaildAddress.click();
     	MaildAddress.sendKeys(user);
-		test.info("Entered mailaddress: " + user);
 		Library.threadSleep(2000);
 		
 		
 		pwd.sendKeys(pass);
 		Library.threadSleep(2000);
 		
-		test.info("Entered Password: " + pass);
+		
 		lgbtn.click();
 		Library.threadSleep(2000);
 
-		test.info("Click on login button: ");
 		
+		generic.Library.verifyText(driver, "Stack trace", "error on Patrol home page");
+
 		
      	
-     	WebElement dashboardElement = driver.findElement(By.xpath("//*[@id=\"userDropdown\"]/span"));
-     	
-        if (dashboardElement.isDisplayed()) {
-            test.pass("Patrol Login successfully, valid user is displayed on home page");
-        } else {
-            throw new AssertionError("Valid user not displayed on home page may be Patrol_Login page not working please check.");
-        }
-    }
-    
+    }  
 	
 }

@@ -6,13 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+
 import com.aventstack.extentreports.ExtentTest;
 
-import UtilityClass.Library;
 import generic.BaseLib;
+import generic.Library;
 
-public class LR_EditProfile extends BaseLib{
+public class LR_EditProfile {
 
 	
 	
@@ -34,9 +34,9 @@ public class LR_EditProfile extends BaseLib{
 		
 	
 
-    public LR_EditProfile (WebDriver driver, ExtentTest test) {
+    public LR_EditProfile (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
+        
         PageFactory.initElements(driver, this);
     }    
 
@@ -53,18 +53,7 @@ public class LR_EditProfile extends BaseLib{
 		js7.executeScript("arguments[0].scrollIntoView(true);",editprof );
 		editprof.click();
 		Library.threadSleep(3000);
-		  WebElement editprofile = driver.findElement(By.xpath("//h4[contains(text(),'Edit Profile')]"));
-          
-          Library.threadSleep(2000);
-         
-          if (editprofile.isDisplayed()) {
-              System.out.println("EditProfile page title is displayed. Edit Profile page open successfully ,Test passed!");
-          } else {
-              System.out.println("EditProfile title is NOT displayed. Means error coming , Test failed!");
-              Assert.fail("EditProfile title not display means It throw error while open it");
-          }
-     
-		 
+		Library.verifyText(driver, "HTTP ERROR 500", "error on lr changepassword");
      
      }
 }

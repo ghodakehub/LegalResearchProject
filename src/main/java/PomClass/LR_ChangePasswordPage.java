@@ -1,23 +1,27 @@
 package PomClass;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.aventstack.extentreports.ExtentTest;
+import generic.Library;
 
-import UtilityClass.Library;
-import generic.BaseLib;
 
-public class LR_ChangePasswordPage extends BaseLib{
+
+public class LR_ChangePasswordPage {
 
 
 		WebDriver driver;
-		ExtentTest test;
+		//ExtentTest test;
 
 		@FindBy(xpath = "//*[@id=\"navbarsExampleDefault\"]/ul/li/a")
 		private WebElement profilename;                
@@ -33,9 +37,8 @@ public class LR_ChangePasswordPage extends BaseLib{
 			
 		
 
-	    public LR_ChangePasswordPage (WebDriver driver, ExtentTest test) {
+	    public LR_ChangePasswordPage (WebDriver driver) {
 	        this.driver = driver;
-	        this.test = test; // Assign ExtentTest to the POM class
 	        PageFactory.initElements(driver, this);
 	    }    
 
@@ -47,23 +50,23 @@ public class LR_ChangePasswordPage extends BaseLib{
 			Library.click(driver, profile, "Click on profile");
 			Library.threadSleep(3000);
 			
-			WebElement changepass = driver.findElement(By.xpath("//a[contains(text(),'Change password')]"));
-			JavascriptExecutor js7= (JavascriptExecutor) BaseLib.driver;
-			js7.executeScript("arguments[0].scrollIntoView(true);",changepass );
-			changepass.click();
+			 By changepassLocator = By.xpath("/html/body/main/section/div/div/div/div/aside/section[2]/div/div/div[2]/ul/li[2]/a");
+
+		        // Wait until element is clickable
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		        WebElement changepass = wait.until(ExpectedConditions.elementToBeClickable(changepassLocator));
+
+		        // Try clicking with WebDriver first
+		        try {
+		            changepass.click();
+		        } catch (ElementClickInterceptedException e) {
+		            // If intercepted, fallback to JavaScript click
+		            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", changepass);
+		        }
 			Library.threadSleep(3000);
-			  WebElement changepasstitle = driver.findElement(By.xpath("//h4[contains(text(),'Change Password')]"));
-	          
-	          Library.threadSleep(2000);
-	         
-	          if (changepasstitle.isDisplayed()) {
-	              System.out.println("ChangePassword page title is displayed. ChangePassword page open successfully ,Test passed!");
-	          } else {
-	              System.out.println("ChangePassword title is NOT displayed. Means Server error coming , Test failed!");
-	              Assert.fail("ChangePassword page not open it showing error of Server");
-	          }
-	     
-			 
-	     
+			
+			
+			Library.verifyText(driver, "HTTP ERROR 500", "error on lr changepassword");
 	     }
+		
 }

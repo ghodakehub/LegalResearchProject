@@ -19,7 +19,7 @@ import com.aventstack.extentreports.ExtentTest;
 import UtilityClass.Library;
 import generic.BaseLib;
 
-public class NewActList extends BaseLib {
+public class NewActList  {
 
 	WebDriver driver;
 	ExtentTest test;
@@ -33,9 +33,9 @@ public class NewActList extends BaseLib {
 	@FindBy(xpath = "//*[@id=\"centralActType\"]")
 	private WebElement Selecttype;
 	
-	 public NewActList (WebDriver driver, ExtentTest test) {
+	 public NewActList (WebDriver driver) {
 	        this.driver = driver;
-	        this.test = test; // Assign ExtentTest to the POM class
+	        
 	        PageFactory.initElements(driver, this);
 	    }    
 	

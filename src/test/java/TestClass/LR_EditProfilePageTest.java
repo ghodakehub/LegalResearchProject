@@ -19,101 +19,62 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import ConfigurationPath.PathFile;
 import ExtentReportBasic.ExtentReportManager;
+import PomClass.LR_ChangePasswordPage;
 import PomClass.LR_EditProfile;
 import PomClass.Login;
 import UtilityClass.UtilityClass;
 import generic.BaseLib;
+import generic.EmailUtility;
 import generic.ForMultiplemailReceipent;
 
-public class LR_EditProfilePageTest {
-	
-	
-	BaseLib base;
-	UtilityClass utility1;
-	String FrontpageOFweb;
-	PathFile urlpath;
-	Login log;
-	LR_EditProfile edit;
-	
-	
-public static ExtentReports extent;
-	
-	public static ExtentSparkReporter spark;
-	
-	public static ExtentTest test;
-	
-	
-	@BeforeClass
-	public void launchbrowser()
-	{
-		ExtentReportManager.initializeExtentReports();
+public class LR_EditProfilePageTest extends BaseLib{
 
-        // Create a new test for this class
-        test = ExtentReportManager.extent.createTest("Verify the SearchResultOF  LR_Website");
-		
-		base= new BaseLib();
-		base.initailizbrowser();
-		base.implicitwait(6);
-		//base.driver.get(PathFile.LRURL);
-		log= new Login(BaseLib.driver, test);
-		edit=new LR_EditProfile(BaseLib.driver, test);
-		utility1= new UtilityClass();
-		
-	}
+	
 	
 
 	
 	@Test
-	public void LR_EditProfile() throws InterruptedException, IOException
+	public void verifyLrEditprofile() throws InterruptedException, IOException, MessagingException
 	
 	{
 		
-		
-		
 		BaseLib.driver.get(PathFile.LRURL);
-		 String pageTitle = BaseLib.driver.getTitle();
-		 System.out.println("page title is" +pageTitle);
+		Login log = new Login(driver);
 		log.login("pratiksha.damodar@legitquest.com","lq@123");
-		//Thread.sleep(1000);
-		edit.EditProfile();
+	
+				LR_EditProfile pass= new LR_EditProfile(driver);
+		pass.EditProfile();
 		
-		
-	}
+		 if (!generic.Library.errorUrls.isEmpty()) {
+	            System.out.println("Lr edit page verificaiton");
+	            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR EditProfile page error");
+	            if (!generic.Library.errorUrls.isEmpty()) {
+	                System.out.println("Lr edit page verification failed.");
+	                generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR EditProfile page error");
 
+	                String[] recipients = {
+	                    "ghodake6896@gmail.com",
+	                    "mamta.Kashyap@legitquest.com"
+	                };
 
-		@AfterMethod()
-		public void aftermethod(ITestResult result) throws  IOException, MessagingException
-		{
-			if(result.getStatus()== ITestResult.FAILURE)
-			{
-				test.log(Status.FAIL, "test case is failed"+result.getName());
-				test.log(Status.FAIL, "test case is failed"+result.getThrowable());
-				String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,result.getName() );
-			
-				test.log(Status.FAIL,"test"+ test.addScreenCaptureFromPath(screenshot));
-				String testUrl = BaseLib.driver.getCurrentUrl();  
-				
-				 ForMultiplemailReceipent.sendEmail(
-		            	  BaseLib.driver , new String[]{"ghodake6896@gmail.com"},
-		            	    "LR Edit Profile PAGE ",
-		            	    "Please check issue coming on LR EditProfile page showing error, please find the attached screenshot for details." ,
-		            	    screenshot, testUrl
-		            	   
-		            	);
-			
-			
-			}
-			
-			else if(result.getStatus()== ITestResult.SKIP){
-				
-				
-				test.log(Status.SKIP, "test case is skipped"+result.getName());
-				
+	                EmailUtility.sendSummaryEmailWithScreenshots(
+	                    driver,
+	                    recipients,
+	                    "LR Automation - EditProfile",
+	                    "Issue detected while editing the profile page. See the attached screenshot and failed URLs below.",
+	                    generic.Library.errorUrls,
+	                    generic.Library.screenshotBytesList
+	                );
 
-			}ExtentReportManager.flushReports(); // Flush the report
+	                Assert.fail("Test Case Failed: LR EditProfile page contains errors.");
+	            } else {
+	                System.out.println("LR EditProfile Page Verified Successfully!");
+	            }
+	        }
+	       
+	    }
+
 	    
-			BaseLib.driver.quit();	
-			}
+	    }
+	
 
-
-}

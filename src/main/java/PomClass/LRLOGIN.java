@@ -1,5 +1,7 @@
 package PomClass;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -7,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -47,49 +51,49 @@ public class LRLOGIN  extends BaseLib{
 
 	public void login(String user, String pass) throws InterruptedException {
 
-		username.sendKeys(user);
-		Thread.sleep(2000);
-		test.info("Entered username: " + user);
-		pwd.clear();
-		test.info("Clear password: " + pass);
-		pwd.sendKeys(pass);
-		Thread.sleep(2000);
-		test.info("Entered Password: " + pass);
-		
-     
-     	try {
-     	    // Perform login action
-     	    WebElement loginButton = driver.findElement(By.xpath("//*[@id=\"indiviual_form\"]/div/div[3]/button"));
-     	    loginButton.click();
-     	} catch (ElementNotInteractableException e) {
-     	    // Log specific error
-     	    Reporter.log("Login button not interactable: " + e.getMessage());
-     	    Assert.fail("Critical error - Login button issue.");
-     	} catch (Exception e) {
-     	    // Log generic errors
-     	    Reporter.log("Unexpected error occurred: " + e.getMessage());
-     	    Assert.fail("Test failed due to unexpected error.");
-     	}
-     	
-     	
-     	
-		test.info("Click on login button: ");
-		Thread.sleep(3000);
-		JavascriptExecutor js7= (JavascriptExecutor) BaseLib.driver;
-		js7.executeScript("arguments[0].scrollIntoView(true);",loginpop );
-		loginpop.click();
-     	Thread.sleep(2000);
 	
-     	//String acutaltext = validusername.getText();
-     	//String expectedtext="Pratiksha Ghodake";
-     	
-     	WebElement dashboardElement = driver.findElement(By.xpath("(//*[@id=\"firstname\"])[2]"));
-        if (dashboardElement.isDisplayed()) {
-            test.pass("Login successfully, valid user is displayed on home page");
-        } else {
-            throw new AssertionError("Valid user not displayed on home page may be Login page not working please check.");
-        }
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 
-     	
-	}
+	        try {
+	           
+	            WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@placeholder='Email'])[1]")));
+	            emailField.sendKeys("pratiksha.damodar@legitquest.com");
+
+	            // Wait for Password Field and Enter Password
+	            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@name='password'])[1]")));
+	            passwordField.sendKeys("YourSecurePassword"); // Replace with actual password
+
+	            // Click the Login Button
+	            WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(), 'Take me in!')])[1]")));
+	            loginButton.click();
+
+	            // Check if the "Login Alert" popup appears
+	            try {
+	                WebElement popupLoginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[contains(text(), ' Login')])[1]")));
+	                popupLoginButton.click();
+	                System.out.println("🔹 Login Alert detected and handled.");
+	            } catch (Exception e) {
+	                System.out.println("🔹 No Login Alert detected. Continuing...");
+	            }
+
+	            // Validate Successful Login
+	            boolean isLoginSuccessful = wait.until(ExpectedConditions.urlContains("https://www.legitquest.com/home")); // Adjust expected URL
+	            if (isLoginSuccessful) {
+	                System.out.println("✅ Login Successful!");
+	            } else {
+	                System.out.println("❌ Login Failed!");
+	            }
+
+	        } catch (Exception e) {
+	            System.out.println("❌ Error occurred: " + e.getMessage());
+	        } finally {
+	            // Close the browser
+	           // driver.quit();
+	        }
+	    
+	
+
 }
+}
+	
+

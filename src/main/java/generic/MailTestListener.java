@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+
 public class MailTestListener implements ITestListener {
 	
 	@Override
@@ -17,9 +18,8 @@ public class MailTestListener implements ITestListener {
 	        String screenshotPath = captureScreenshot(testName); // Implement your screenshot logic
 	        String subject = "Test Failure: " + testName;
 	        String body = "Test case \"" + testName;
+	     //   EmailUtility.sendSummaryEmailWithScreenshots(driver, subject, message, Library.errorUrls, Library.screenshotBytesList);
 
-	        // Send email
-	        EmailUtility.sendEmail("recipient@gmail.com", subject, body, screenshotPath);
 	    }
 
 	    private String captureScreenshot(String testName) {
