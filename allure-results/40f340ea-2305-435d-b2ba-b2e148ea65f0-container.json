@@ -1,0 +1,1 @@
+{"uuid":"40f340ea-2305-435d-b2ba-b2e148ea65f0","name":"TestClass.NewActListTest","children":["9f5ad0eb-e0e4-4769-85a0-a405d303eb76"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744180082705,"stop":1744180083828}],"afters":[],"start":1744179820733,"stop":1744180176762}

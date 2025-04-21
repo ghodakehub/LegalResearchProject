@@ -1,28 +1,10 @@
 package TestClass;
 
-import java.io.IOException;
 
-import javax.mail.MessagingException;
-
-import org.openqa.selenium.NoSuchSessionException;
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
-import ConfigurationPath.PathFile;
-import ExtentReportBasic.ExtentReportManager;
-import UtilityClass.UtilityClass;
 import generic.BaseLib;
 import generic.EmailUtility;
-import generic.ForMultiplemailReceipent;
 import generic.Library;
 
 
@@ -53,7 +35,7 @@ public class LR_HomePage extends BaseLib {
 		                EmailUtility.sendSummaryEmailWithScreenshots(
 		                    driver,
 		                    recipients,
-		                    "LR Automation - LR Home Page",
+		                    "LR - LR Home Page",
 		                    "Please check Issue coming on LR home page. See the attached screenshot and failed URLs below.",
 		                    generic.Library.errorUrls,
 		                    generic.Library.screenshotBytesList

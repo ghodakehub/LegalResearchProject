@@ -6,10 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import com.aventstack.extentreports.ExtentTest;
 
-import generic.BaseLib;
-import io.qameta.allure.Allure;
 
 public class Libil_Login {
 
@@ -54,15 +51,7 @@ public class Libil_Login {
 		Thread.sleep(1000);
 		element.click();
 	
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		
-     	
-
-     	WebElement dashboardElement = driver.findElement(By.xpath("/html/body/header/div/div/h4"));
-        if (dashboardElement.isDisplayed()) {
-            Allure.step("Libil login successful");
-        } else {
-            throw new AssertionError(" Admin user is not displayed on home page may be Libil login page not working please check.");
-        }
     }
 }

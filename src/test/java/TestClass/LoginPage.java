@@ -33,12 +33,14 @@ public class LoginPage extends BaseLib {
 		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR login page error");
 		            String[] recipients = {
 		            	    "ghodake6896@gmail.com",
-		            	    "mamta.Kashyap@legitquest.com"
+		            	    "krishna.jaiswal@legitquest.com","mamta.Kashyap@legitquest.com"
+		            	    ,"rajan.batra@legitquest.com"
+		            	     
 		            	    
 		            	};
 
 		            EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients, 
-		            	    "LR Automation - Login Page",
+		            	    "LR  - Login Page",
 		            	    "Please check issue coming on LR login page , see the attached screenshot for details", 
 		            	  generic. Library.errorUrls, 
 		            	  generic.  Library. screenshotBytesList);

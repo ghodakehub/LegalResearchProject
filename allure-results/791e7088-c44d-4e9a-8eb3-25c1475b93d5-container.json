@@ -1,0 +1,1 @@
+{"uuid":"791e7088-c44d-4e9a-8eb3-25c1475b93d5","name":"TestClass.Lr_ChangePassTest","children":["24338bd5-b65a-4125-95f7-00d7fb36ffbd"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744179735593,"stop":1744179737837}],"afters":[],"start":1744179735535,"stop":1744179793423}

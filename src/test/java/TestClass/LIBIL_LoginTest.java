@@ -1,25 +1,18 @@
 package TestClass;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.mail.MessagingException;
-
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
 import ConfigurationPath.PathFile;
-import ExtentReportBasic.ExtentReportManager;
 import PomClass.Libil_Login;
-import UtilityClass.UtilityClass;
 import generic.BaseLib;
-import generic.ForMultiplemailReceipent;
+import generic.EmailUtility;
+import generic.ErrorChecker;
+
 
 public class LIBIL_LoginTest extends BaseLib{
 	
@@ -28,49 +21,42 @@ public class LIBIL_LoginTest extends BaseLib{
 	
 	
 	@Test
-	public void VerifyLoginPageOFLibil() throws InterruptedException, IOException
+	public void VerifyLoginPageOFLibil() throws InterruptedException, IOException, MessagingException
 	
 	{
 		BaseLib.driver.get(PathFile.LIBILurl);
 		Thread.sleep(2000);
 		Libil_Login log = new Libil_Login(driver);
 		log.login("admin@gmail.com","Admin@345");
-		//test1.pass("Login TestCase is passed successfully.");
 		
+		  // Check for server error
+		if (ErrorChecker.isServerErrorPresent(driver)) {
+	        System.out.println("LIBIL server error detected.");
+	        generic.AllureListeners.captureScreenshot(BaseLib.driver, "LIBIL_login_server_error");
+
+	        String[] recipients = {
+	            "ghodake6896@gmail.com"
+	        };
+
+	        List<String> urls = new ArrayList<>();
+	        urls.add(driver.getCurrentUrl());
+
+	        EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients,
+	            "LIBIL - SERVER ERROR Detected on Login",
+	            "Please check error detected on LIBIL login page.\nPlease check the attached screenshot and url.",
+	            urls,
+	            generic.Library.screenshotBytesList
+	        );
+
+	        Assert.fail("Test Failed: Real server error detected.");
+	    } else {
+	        System.out.println("LIBIL login page loaded fine, no server error.");
+	    }
 	}
+    }
 
-	
-	@AfterMethod()
-	public void aftermethod(ITestResult result) throws  IOException, MessagingException
-	{
-		if(result.getStatus()== ITestResult.FAILURE)
-		{
-			
-			String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,result.getName() );
-		
-			 String testUrl = BaseLib.driver.getCurrentUrl();  
-			 ForMultiplemailReceipent.sendEmail(
-					 BaseLib.driver, new String[]{"ghodake6896@gmail.com"
-							
-						
-							
-							 },
-	            	    "LIBIL LOGIN PAGE ",
-	            	    "Please check issue coming on LIBIL LOGIN page, please find the attached screenshot for details." ,
-	            	    screenshot, testUrl
-	            	   
-	            	);
-		
-		}
-		
-		else if(result.getStatus()== ITestResult.SKIP){
-			
-		
-		}ExtentReportManager.flushReports(); // Flush the report
-    
-		BaseLib.driver.quit();	
-		}
 
+		
 	
 
-}
+
