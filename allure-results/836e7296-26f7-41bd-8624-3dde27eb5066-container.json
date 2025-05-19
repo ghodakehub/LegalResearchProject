@@ -1,0 +1,1 @@
+{"uuid":"836e7296-26f7-41bd-8624-3dde27eb5066","name":"TestClass.VerifyLegitquestWebsiteDown","children":["084c6f7f-4a23-4a00-b81a-f98a89cd6d9a"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744180164592,"stop":1744180165666}],"afters":[],"start":1744179820733,"stop":1744180176764}

@@ -1,0 +1,1 @@
+{"uuid":"354cd61d-53bc-4a8d-9eca-92cf9ded7dab","name":"TestClass.LoginPage","children":["0a0acce8-7595-4ff7-9f12-ca75c916a100"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744179820810,"stop":1744179823198}],"afters":[],"start":1744179820733,"stop":1744180176756}

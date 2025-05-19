@@ -1,0 +1,1 @@
+{"uuid":"49fddbc2-5e59-4098-bd9e-e3ae52930494","name":"TestClass.VerifyManagementToolWebsite","children":["aec5d5ca-6915-4a15-94aa-11618227d9e4"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744180174065,"stop":1744180175132}],"afters":[],"start":1744179820734,"stop":1744180176765}

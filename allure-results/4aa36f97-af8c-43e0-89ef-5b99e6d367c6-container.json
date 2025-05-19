@@ -1,0 +1,1 @@
+{"uuid":"4aa36f97-af8c-43e0-89ef-5b99e6d367c6","name":"TestClass.LR_HomePage","children":["c97ed5ef-c368-4af6-b9fa-2d19547ec03f"],"befores":[{"name":"launchbrowser","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1744179842100,"stop":1744179843399}],"afters":[],"start":1744179820732,"stop":1744180176755}
