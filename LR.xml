@@ -17,7 +17,7 @@
       <class name="TestClass.Lr_ChangePassTest"/>
       <class name="TestClass.LR_EditProfilePageTest"/>
        <class name="TestClass.searchresultsofLR"/>
-        <class name="TestClass.NewActListTest"/>
+        <class name="TestClass.ActListpageTest"/>
       <class name="TestClass.VerifyLegiteyeWebsiteDown"/>
       <class name="TestClass.VerifyLegitquestWebsiteDown"/>
       <class name="TestClass.VerifyLibilWebsiteDown"/>
