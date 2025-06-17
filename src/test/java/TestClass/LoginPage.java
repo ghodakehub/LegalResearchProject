@@ -1,18 +1,14 @@
 package TestClass;
 
 import java.io.IOException;
-
 import javax.mail.MessagingException;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import ConfigurationPath.PathFile;
 import PomClass.Login;
-import UtilityClass.UtilityClass;
 import generic.BaseLib;
 import generic.EmailUtility;
-import generic.ForMultiplemailReceipent;
+
 
 
 public class LoginPage extends BaseLib {
@@ -32,7 +28,7 @@ public class LoginPage extends BaseLib {
 		            System.out.println("Login page verificaiton");
 		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR login page error");
 		            String[] recipients = {
-		            	    "ghodake6896@gmail.com",
+		            	    "ghodake6896@gmail.com"
 		            	    
 		            	    
 		            	};

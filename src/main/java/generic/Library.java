@@ -18,8 +18,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-
 import io.qameta.allure.Allure;
 
 public class Library {
@@ -152,21 +150,26 @@ public class Library {
 	    }
 	}
     
-	public static boolean verifyText2(WebDriver driver, String searchText, String message, TestResultCollector collector) {
+	public static boolean verifyText2(WebDriver driver, String searchText, String message) {
 	    try {
 	        List<WebElement> errorElements = driver.findElements(By.xpath("//*[contains(text(),'" + searchText + "')]"));
 	        if (!errorElements.isEmpty()) {
 	            String url = driver.getCurrentUrl();
-	            byte[] screenshot = AllureListeners.captureScreenshot(driver, message);
-	            collector.add(url, screenshot);
-	            System.out.println("Error Found: " + searchText + " on URL: " + url);
-	            return true;
+	            errorUrls.add(url);
+	            Allure.addAttachment("URL", url);
+	            byte[] screenshot = AllureListeners.captureScreenshot(driver, message); // Capture Screenshot Path
+	            screenshotBytesList.add(screenshot);// Store Screenshot Path
+	            
+	           // Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
+	            System.out.println(" Error Found: " + searchText + " on URL: " + url);
+	            return true; // Return true if error is found
 	        }
 	    } catch (Exception e) {
-	        System.out.println("Error while checking text: " + e.getMessage());
+	        System.out.println("No error found: " + e.getMessage());
 	    }
-	    return false;
+	    return false; // Return false if no error
 	}
+
 	
 	
 	public static void addScreenshotToList(WebDriver driver, String screenshotName) {

@@ -54,7 +54,7 @@ public class VerifyManagementToolWebsite  extends BaseLib {
 				
 				String testUrl = BaseLib.driver.getCurrentUrl();  
 				 ForMultiplemailReceipent.sendEmail(
-		            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+		            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
 		            	    "Patrol Website Down Alert ",
 		            	    "Patrol website not working please check , please find the attached screenshot for details." ,
 		            	    screenshot,testUrl

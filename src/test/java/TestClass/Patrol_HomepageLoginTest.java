@@ -6,8 +6,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ConfigurationPath.PathFile;
 import PomClass.Patrol_HomepageLogin;
+import UtilityClass.UtilityClass;
 import generic.BaseLib;
 import generic.EmailUtility;
+import generic.ForMultiplemailReceipent;
 
 
 
@@ -27,19 +29,19 @@ public class Patrol_HomepageLoginTest extends BaseLib{
 		
 		 if (!generic.Library.errorUrls.isEmpty()) {
 	            System.out.println("Patrolhome page verificaiton");
-	            generic.AllureListeners.captureScreenshot(BaseLib.driver, "PatroHome Page error");
-	         
-	            String[] recipients = {
-	            	    "ghodake6896@gmail.com", 
-	            	    
-	            	};
-
-	            EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients, 
-	            	    "Patrol Automation - Home Page",
-	            	    "Please check issue coming on PatrolHomepage , see the attached screenshot for details", 
-	            	  generic. Library.errorUrls, 
-	            	  generic.  Library. screenshotBytesList);
-	            Assert.fail("Test Case Failed: LR login page");
+	           
+	            String screenshot=  UtilityClass.Capaturescreenshot(BaseLib.driver,"error on homepage" );
+				
+				String testUrl = BaseLib.driver.getCurrentUrl();  
+				 ForMultiplemailReceipent.sendEmail(
+		            	   BaseLib.driver, new String[]{"ghodake6896@gmail.com"},
+		            	    "PatrolHomepage ",
+		            	    "Issue detected on Patrol home page please check , please find the attached screenshot for details." ,
+		            	    screenshot,testUrl
+		            	   
+		            	);
+				 Assert.fail("Test Case Failed: patrolHomepage");
+	           
 	        } else {
 	            System.out.println("Patrolhome page open successfully");
 	        }

@@ -28,7 +28,7 @@ public class Errordetectionemethod {
 	        }
 	    }
 
-	    // Extra fallback: blank page or error title
+	   
 	    if (!isErrorDetected) {
 	        if (pageSource.trim().isEmpty() || driver.getTitle().toLowerCase().contains("error")) {
 	            isErrorDetected = true;

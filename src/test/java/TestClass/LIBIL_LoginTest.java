@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ConfigurationPath.PathFile;
@@ -32,10 +35,18 @@ public class LIBIL_LoginTest extends BaseLib{
 		  
 		if (ErrorChecker.isServerErrorPresent(driver)) {
 	        System.out.println("LIBIL server error detected.");
+	        byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	        generic.AllureListeners.captureScreenshot(driver, "libillogin");
+
+	        
+	        generic.Library.errorUrls.add(driver.getCurrentUrl());
+	        generic.Library.screenshotBytesList.add(screenshotBytes);
+
 	        generic.AllureListeners.captureScreenshot(BaseLib.driver, "LIBIL_login_server_error");
 
 	        String[] recipients = {
 	            "ghodake6896@gmail.com"
+	           
 	        };
 
 	        List<String> urls = new ArrayList<>();

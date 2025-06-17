@@ -1,10 +1,16 @@
 package PomClass;
 
+
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import javax.mail.MessagingException;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,11 +18,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.Reporter;
-
-import com.aventstack.extentreports.ExtentTest;
-
 import generic.BaseLib;
+import generic.EmailUtility;
+import generic.SwitchWindow;
 
 public class LRLOGIN  extends BaseLib{
 
@@ -24,7 +28,14 @@ public class LRLOGIN  extends BaseLib{
 	
 	
 	WebDriver driver;
-	ExtentTest test;
+	
+
+
+    @FindBy(xpath = "/html/body/div[2]/div/nav/div/a[2]")
+	private WebElement lgbtn1;
+
+	@FindBy(xpath = "//*[@id=\"login-modal\"]/div/div/div[2]/div/div[1]/div/a/div")
+	private WebElement lgbtn2;
 
 	@FindBy(xpath = "//*[@id=\"indiviual_form\"]/div/div[1]/div/input")
 
@@ -33,66 +44,64 @@ public class LRLOGIN  extends BaseLib{
 	@FindBy(xpath = "//*[@id=\"indiviual_form\"]/div/div[2]/div/div/input")
 	private WebElement pwd;
 
-	@FindBy(xpath = "//*[@id=\"indiviual_form\"]/div/div[3]/button")
+	@FindBy(xpath = "(//button[contains(@type,'submit')][normalize-space()='Take me in!'])[1]")
 	private WebElement lgbtn;
 		
-	@FindBy(xpath = "//button[@class='btn btn-primary bootbox-accept']")
+	@FindBy(xpath = "//button[normalize-space()='Login']")
 	private WebElement loginpop;
+
 	
-	@FindBy(xpath = "(//*[@id=\"firstname\"])[2]")
-	private WebElement validusername;
+	public WebElement getlgbtn1() {
+		return lgbtn1;
+	}
 
+	public WebElement getlgbtn2() {
+		return lgbtn2;
+	}
 
-    public LRLOGIN (WebDriver driver, ExtentTest test) {
+	public WebElement getusername() {
+		return username;
+	}
+
+	public WebElement getpwd() {
+		return pwd;
+	}
+
+	public WebElement getlgbtn() {
+		return lgbtn;
+	}
+
+	public WebElement getloginpop() {
+		return loginpop;
+	}
+    public LRLOGIN (WebDriver driver) {
         this.driver = driver;
-        this.test = test; // Assign ExtentTest to the POM class
         PageFactory.initElements(driver, this);
     }    
 
-	public void login(String user, String pass) throws InterruptedException {
+    public void login(String user, String pass) throws InterruptedException, MessagingException {
+        // Click initial login buttons
+        lgbtn1.click();
+        Thread.sleep(3000);
+        lgbtn2.click();
+        Thread.sleep(3000);
 
-	
-	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        // Switch to the new login window/tab
+        SwitchWindow.switchWindowByIndex(driver, 1);
+        Thread.sleep(3000);
 
-	        try {
-	           
-	            WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@placeholder='Email'])[1]")));
-	            emailField.sendKeys("pratiksha.damodar@legitquest.com");
+        // Enter credentials
+        username.sendKeys(user);
+        Thread.sleep(1000);
+        pwd.sendKeys(pass);
+        Thread.sleep(1000);
 
-	            // Wait for Password Field and Enter Password
-	            WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[@name='password'])[1]")));
-	            passwordField.sendKeys("YourSecurePassword"); // Replace with actual password
+        // Click Login
+        lgbtn.click();
+        Thread.sleep(4000);
 
-	            // Click the Login Button
-	            WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[contains(text(), 'Take me in!')])[1]")));
-	            loginButton.click();
-
-	            // Check if the "Login Alert" popup appears
-	            try {
-	                WebElement popupLoginButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[contains(text(), ' Login')])[1]")));
-	                popupLoginButton.click();
-	                System.out.println("🔹 Login Alert detected and handled.");
-	            } catch (Exception e) {
-	                System.out.println("🔹 No Login Alert detected. Continuing...");
-	            }
-
-	            // Validate Successful Login
-	            boolean isLoginSuccessful = wait.until(ExpectedConditions.urlContains("https://www.legitquest.com/home")); // Adjust expected URL
-	            if (isLoginSuccessful) {
-	                System.out.println("✅ Login Successful!");
-	            } else {
-	                System.out.println("❌ Login Failed!");
-	            }
-
-	        } catch (Exception e) {
-	            System.out.println("❌ Error occurred: " + e.getMessage());
-	        } finally {
-	            // Close the browser
-	           // driver.quit();
-	        }
-	    
-	
-
+      
+     
 }
 }
 	

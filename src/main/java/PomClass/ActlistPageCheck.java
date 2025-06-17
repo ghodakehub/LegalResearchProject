@@ -25,36 +25,57 @@ public class ActlistPageCheck {
     }    
 
 
-	public void clickActListAndCheckResponsiveness() throws Exception {
-	   
-	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    
+    public void clickActListAndCheckResponsiveness() throws Exception {
 
-	   
-	    WebElement actListButton = driver.findElement(By.xpath("/html/body/div[3]/main/a[2]/button"));  
-	    actListButton.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-	   
-	    try {
-	        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[@id='allAct']")));  
-	        System.out.println(" Act list loaded successfully.");
-	    } catch (TimeoutException e) {
-	        System.out.println(" Act list failed to load — page may be unresponsive.");
+        
+        WebElement actListButton = driver.findElement(By.xpath("/html/body/div[3]/main/a[2]/button"));
+        actListButton.click();
 
-	        
-	        String screenshot = UtilityClass.Capaturescreenshot(driver, "ActList_Unresponsive");
+        try {
+            
+            try {
+                shortWait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'lq-spin.gif')]")
+                ));
+            } catch (TimeoutException te) {
+                System.out.println("Loader did not appear — may have been skipped.");
+            }
 
-	        
-	        String[] recipients = {"ghodake6896@email.com"};
-	        ForMultiplemailReceipent.sendEmail(
-	                driver, recipients,
-	                "LR ActList",
-	                "The Act List page did not load properly. Possibly unresponsive. Screenshot attached.",
-	                screenshot,
-	                driver.getCurrentUrl()
-	        );
+            
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.xpath("//img[contains(@src, 'lq-spin.gif')]")
+            ));
 
-	       
-	        Assert.fail("Page may be unresponsive or hung after clicking Act List.");
-	    }
-	}
+           
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[@id='allAct']")
+            ));
+
+            System.out.println("Act list loaded successfully.");
+
+        } catch (TimeoutException e) {
+            System.out.println("Act list failed to load — likely stuck on loading spinner or unresponsive.");
+
+           
+            String screenshot = UtilityClass.Capaturescreenshot(driver, "ActList_Unresponsive");
+
+           
+            String[] recipients = {"ghodake6896@gmail.com"};
+            ForMultiplemailReceipent.sendEmail(
+                driver, recipients,
+                "LR Act List Load Failure",
+                "The Act List page might be stuck on the loader or failed to load properly. Screenshot is attached.",
+                screenshot,
+                driver.getCurrentUrl()
+            );
+
+           
+            Assert.fail("Act List page did not load — possible loading hang.");
+        }
+    }
+
 }

@@ -10,14 +10,19 @@
 	  
 	  
     <classes>
-     
-      <class name="TestClass.LoginPage"/>
+     <class name="TestClass.NASTESTPAGE"/>  
+    <class name="TestClass.LoginPage"/>                  
       <class name="TestClass.LR_HomePage"/>
+      <class name="TestClass.NewLrLoginpage"/>
       <class name="TestClass.LIBIL_LoginTest"/>
+       <class name="TestClass.LIBIL_Homepage"/>
       <class name="TestClass.Lr_ChangePassTest"/>
       <class name="TestClass.LR_EditProfilePageTest"/>
-       <class name="TestClass.searchresultsofLR"/>
-        <class name="TestClass.ActListpageTest"/>
+      <class name="TestClass.searchresultsofLR"/>
+      <class name="TestClass.ActListpageTest"/>               
+      <class name="TestClass.Patrol_LoginTest"/>
+      <class name="TestClass.smokesuiteofmanagecase"/>
+        <class name="TestClass.smokesuiteTesst"/>
       <class name="TestClass.VerifyLegiteyeWebsiteDown"/>
       <class name="TestClass.VerifyLegitquestWebsiteDown"/>
       <class name="TestClass.VerifyLibilWebsiteDown"/>
