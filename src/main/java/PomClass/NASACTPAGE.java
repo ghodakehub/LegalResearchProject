@@ -18,46 +18,54 @@ public class NASACTPAGE {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }    
-    public void loginAndCheckError(WebDriver driver) {
+    public void loginAndCheckError() {
+        String testUrl = "http://148.113.38.3/login";
+
         try {
-            driver.get("http://148.113.38.3/login");
+            driver.get(testUrl);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+            // Give the page a moment to load content fully
+            Thread.sleep(3000); // Optional small delay if content loads slowly
 
             String pageSource = driver.getPageSource().toLowerCase();
             String title = driver.getTitle().toLowerCase();
 
-            
-            if (
-                pageSource.contains("this site can’t be reached") ||
+            // ✅ Check for actual failure content
+            boolean isError = false;
+
+            if (pageSource.contains("this site can’t be reached") ||
+                pageSource.contains("site can’t be reached") ||
                 pageSource.contains("err_connection_timed_out") ||
                 pageSource.contains("sqlstate") ||
-                pageSource.contains("too many connections") ||
                 pageSource.contains("illuminate\\database\\queryexception") ||
-                pageSource.contains("database error") ||
+                pageSource.contains("too many connections") ||
                 pageSource.contains("server error") ||
                 pageSource.contains("internal server error") ||
-                title.contains("error")
-            ) {
-               
-                String screenshot = UtilityClass.Capaturescreenshot(BaseLib.driver, "error_nas_png");
-                String testUrl = BaseLib.driver.getCurrentUrl();
+                pageSource.contains("database error") ||
+                title.contains("error")) {
 
-                // Send email
+                isError = true;
+            }
+
+            if (isError) {
+                String screenshot = UtilityClass.Capaturescreenshot(driver, "NAS_Error");
                 ForMultiplemailReceipent.sendEmail(
-                    BaseLib.driver,
-                    new String[]{"ghodake6896@gmail.com"},
-                    "NAS Error Detected",
-                    "NAS is not working. Possible server or SQL error detected. Please find the attached screenshot for details.\n\nURL: " + testUrl,
+                    driver,
+                    new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
+                    "NAS Login Page Error Detected",
+                    "The NAS login page failed to load correctly. A possible server or SQL error has been detected. Please check the attached screenshot.\n\nURL: " + testUrl,
                     screenshot,
                     testUrl
                 );
+            } else {
+                System.out.println("NAS login page loaded successfully.");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    }
+}
 
 

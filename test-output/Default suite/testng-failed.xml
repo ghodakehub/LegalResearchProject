@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.Patrol_LoginTest">
+      <class name="TestClass.searchresultsofLR">
         <methods>
           <include name="tearDown"/>
+          <include name="LRsearchResult"/>
           <include name="initializeBrowser"/>
-          <include name="VerifyLoginPageOF_Patrol"/>
         </methods>
-      </class> <!-- TestClass.Patrol_LoginTest -->
+      </class> <!-- TestClass.searchresultsofLR -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

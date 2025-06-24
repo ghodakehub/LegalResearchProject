@@ -66,7 +66,7 @@ public class Login  {
 		return loginpop;
 	}
 
-	public void login(String user, String pass) throws InterruptedException {
+public void login(String user, String pass) throws InterruptedException {
 		
 
 		lgbtn1.click(); // login button for home page first

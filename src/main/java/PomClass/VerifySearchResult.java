@@ -1,6 +1,7 @@
 package PomClass;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,9 +17,11 @@ import org.testng.Assert;
 import com.aventstack.extentreports.ExtentTest;
 
 import UtilityClass.Library;
+import UtilityClass.UtilityClass;
 import generic.AllureListeners;
 import generic.BaseLib;
 import generic.EmailUtility;
+import generic.ForMultiplemailReceipent;
 
 public class VerifySearchResult extends BaseLib{
 	
@@ -43,50 +46,60 @@ public class VerifySearchResult extends BaseLib{
 
 	
 	
-// Actions 	
-	public void SearhResultverify(WebDriver driver, String keyword) throws InterruptedException {
-	
-		 try {
-		        // Enter keyword and search
-		        WebElement searchBox = driver.findElement(By.xpath("//*[@id=\"search\"]"));
-		        searchBox.sendKeys(keyword);
-		        
-		        driver.findElement(By.id("btnSearch")).click();
+    public void SearhResultverify(WebDriver driver, String keyword) throws InterruptedException {
+        try {
+            // Step 1: Enter keyword in the search box
+            WebElement searchBox = driver.findElement(By.xpath("//*[@id='search']"));
+            searchBox.clear();
+            searchBox.sendKeys(keyword);
 
-		       
-		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		        boolean isResultPresent = false;
+            // Step 2: Click the Search button
+            driver.findElement(By.id("btnSearch")).click();
 
-		        try {
-		            
-		            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Found :')]")));
-		            isResultPresent = true;
-		        } catch (TimeoutException e) {
-		 
-		            isResultPresent = false;
-		        }
+            // Step 3: Wait for the loading spinner to disappear
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            try {
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    By.xpath("//img[contains(@src, 'lq-spin.gif')]")
+                ));
+                System.out.println(" Spinner disappeared — page loaded.");
+            } catch (TimeoutException e) {
+                System.out.println(" Spinner did not disappear — possible loading issue.");
+            }
+            
+            Thread.sleep(2000);
 
-		        if (!isResultPresent) {
-		            System.out.println("❌ No results found for keyword: " + keyword);
-		            AllureListeners.captureScreenshot(driver,"No_Results_Found_" + keyword);
-		            String[] recipients = {
-		            	    "ghodake6896@gmail.com", 
-		            	    
-		            	};
+            
+            List<WebElement> resultLinks = driver.findElements(By.xpath("//u[@class='result_title']"));
+            boolean hasResults = resultLinks.size() > 0;
 
-		            EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients, 
-		            	    "LR Automation - SearchResults",
-		            	    "Please check issue coming on LR SearchResults showing no results found error , see the attached screenshot for details", 
-		            	  generic. Library.errorUrls, 
-		            	  generic.  Library. screenshotBytesList);
-		            Assert.fail("Test Case Failed: LR SearchResults page");
-		        } 
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        Assert.fail("Exception during search validation: " + e.getMessage());
-		    }
-		}
-	
+            if (!hasResults) {
+                System.out.println(" No search results found for keyword: " + keyword);
+
+               
+                String screenshot = UtilityClass.Capaturescreenshot(driver, "NoSearchResults_" + keyword);
+
+                
+                ForMultiplemailReceipent.sendEmail(
+                    driver,
+                    new String[]{"ghodake6896@gmail.com"},
+                    "LR Search Returned No Results",
+                    "Please check search results not working returned no results on LegitQuest.\nPlease verify manually.\nURL: " + driver.getCurrentUrl(),
+                    screenshot,
+                    driver.getCurrentUrl()
+                );
+
+               
+                Assert.fail("Test Case Failed: No results found for keyword '" + keyword + "'");
+            } else {
+                System.out.println(" Results found for keyword: " + keyword);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail(" Exception during search result verification: " + e.getMessage());
+        }
+    }
 }
 	
 

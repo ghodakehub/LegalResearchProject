@@ -20,7 +20,7 @@ public class NASTESTPAGE extends BaseLib {
 	{
 		
 		NASACTPAGE results= new NASACTPAGE(driver);
-		results.loginAndCheckError(driver);
+		results.loginAndCheckError();
 		
 		
 	}

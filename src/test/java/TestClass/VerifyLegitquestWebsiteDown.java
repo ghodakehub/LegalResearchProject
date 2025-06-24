@@ -1,68 +1,69 @@
 package TestClass;
 
-import java.io.IOException;
 import java.time.Duration;
 
-import javax.mail.MessagingException;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
+
 import org.testng.annotations.Test;
 
 import UtilityClass.UtilityClass;
-import generic.AllureListeners;
+
 import generic.BaseLib;
 import generic.ForMultiplemailReceipent;
-import io.qameta.allure.Allure;
+
 
 public class VerifyLegitquestWebsiteDown  extends BaseLib {
 
 	
 	@Test
-	public void verifyLRwebsite() throws Exception {
+	public void checkLRLoginPageForErrors() {
 	    String testUrl = "https://login.legitquest.com/?redirectUrl=https%3A%2F%2Fwww.legitquest.com%2Fhome&baseurl=https://www.legitquest.com/";
-	  
-	        BaseLib.driver.get(testUrl);
-	        
-	        WebDriverWait wait = new WebDriverWait(BaseLib.driver, Duration.ofSeconds(15));
-	        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/main/h2"))); // adjust to actual element
 
-	        String pageSource = BaseLib.driver.getPageSource().toLowerCase();
-	        String title = BaseLib.driver.getTitle().toLowerCase();
+	    try {
+	        driver.get(testUrl);
+	        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+	       
+	        Thread.sleep(3000);
+
+	        String pageSource = driver.getPageSource().toLowerCase();
+	        String pageTitle = driver.getTitle().toLowerCase();
 
 	        boolean isError = false;
 
-	        if (pageSource.contains("http error 500") || 
-	            pageSource.contains("server error") ||
-	            pageSource.contains("this page isn’t working") ||
+	        
+	        if (pageSource.contains("500") ||
+	            pageSource.contains("internal server error") ||
 	            pageSource.contains("this site can’t be reached") ||
-	            title.contains("error") || title.contains("problem") ||
-	            !pageSource.contains("login")) {  
+	            pageSource.contains("err_connection_timed_out") ||
+	            pageSource.contains("mongodb\\driver\\exception") ||
+	            pageSource.contains("sqlstate") ||
+	            pageSource.contains("stack trace") ||
+	            pageTitle.contains("error")) {
 	            isError = true;
 	        }
 
+	        
 	        if (isError) {
-	            String screenshotPath = UtilityClass.Capaturescreenshot(BaseLib.driver, "LR_ERROR");
-	            AllureListeners.captureScreenshot(BaseLib.driver, "error png");
+	            System.err.println("Server or network error detected on LR login page.");
+
+	            String screenshot = UtilityClass.Capaturescreenshot(driver, "LR_Login_Error");
 
 	            ForMultiplemailReceipent.sendEmail(
-	                BaseLib.driver,
+	                driver,
 	                new String[]{"ghodake6896@gmail.com"},
-	                "LR Website Down Alert",
-	                "LR website is returning a server error (500 or similar). See attached screenshot for details.",
-	                screenshotPath,
-	                BaseLib.driver.getCurrentUrl()
+	                "LR Login Page Error Detected",
+	                "The LR login page appears to be returning a 500 error or server-related failure.\nPlease check manually. Screenshot is attached.\n\nURL: " + testUrl,
+	                screenshot,
+	                testUrl
 	            );
-	            Assert.fail("Website shows server error or is not reachable.");
 	        } else {
-	            System.out.println("Website loaded successfully: " + title);
+	            System.out.println("LR Login page is working fine.");
 	        }
 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        Assert.fail("Exception while checking LR Login page: " + e.getMessage());
+	    }
 	}
-}
+	}
