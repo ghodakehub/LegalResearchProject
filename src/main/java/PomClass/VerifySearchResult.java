@@ -84,7 +84,7 @@ public class VerifySearchResult extends BaseLib{
                     driver,
                     new String[]{"ghodake6896@gmail.com"},
                     "LR Search Returned No Results",
-                    "Please check search results not working returned no results on LegitQuest.\nPlease verify manually.\nURL: " + driver.getCurrentUrl(),
+                    "Please check search results not working returned no results on LegitQuest.\nPlease check attached url and screenshot"
                     screenshot,
                     driver.getCurrentUrl()
                 );
