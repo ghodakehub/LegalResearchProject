@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-06-23T13:17:06 IST" name="Default suite" finished-at="2025-06-23T13:18:01 IST" duration-ms="54946">
+  <suite started-at="2025-06-25T13:55:28 IST" name="Default suite" finished-at="2025-06-25T13:58:03 IST" duration-ms="154742">
     <groups>
     </groups>
-    <test started-at="2025-06-23T13:17:06 IST" name="Default test" finished-at="2025-06-23T13:18:01 IST" duration-ms="54946">
-      <class name="TestClass.searchresultsofLR">
-        <test-method is-config="true" signature="initializeBrowser()[pri:0, instance:TestClass.searchresultsofLR@1df8da7a]" started-at="2025-06-23T13:17:06 IST" name="initializeBrowser" finished-at="2025-06-23T13:17:07 IST" duration-ms="1426" status="PASS">
+    <test started-at="2025-06-25T13:55:28 IST" name="Default test" finished-at="2025-06-25T13:58:03 IST" duration-ms="154742">
+      <class name="TestClass.smokesuiteofmanagecase">
+        <test-method is-config="true" signature="initializeBrowser()[pri:0, instance:TestClass.smokesuiteofmanagecase@66ea810]" started-at="2025-06-25T13:55:28 IST" name="initializeBrowser" finished-at="2025-06-25T13:55:30 IST" duration-ms="1399" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initializeBrowser -->
-        <test-method signature="LRsearchResult()[pri:0, instance:TestClass.searchresultsofLR@1df8da7a]" started-at="2025-06-23T13:17:07 IST" name="LRsearchResult" finished-at="2025-06-23T13:18:00 IST" duration-ms="52893" status="PASS">
+        <test-method signature="VerifysmokeTest()[pri:0, instance:TestClass.smokesuiteofmanagecase@66ea810]" started-at="2025-06-25T13:55:30 IST" name="VerifysmokeTest" finished-at="2025-06-25T13:58:03 IST" duration-ms="152866" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LRsearchResult -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestClass.searchresultsofLR@1df8da7a]" started-at="2025-06-23T13:18:00 IST" name="tearDown" finished-at="2025-06-23T13:18:01 IST" duration-ms="418" status="PASS">
+        </test-method> <!-- VerifysmokeTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:TestClass.smokesuiteofmanagecase@66ea810]" started-at="2025-06-25T13:58:03 IST" name="tearDown" finished-at="2025-06-25T13:58:03 IST" duration-ms="309" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- TestClass.searchresultsofLR -->
+      </class> <!-- TestClass.smokesuiteofmanagecase -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

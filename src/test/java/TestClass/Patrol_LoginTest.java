@@ -30,7 +30,7 @@ public class Patrol_LoginTest extends BaseLib {
 		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "PatrolLogin Page error");
 		            Assert.fail("Test Case Failed: PatrolLogin page contain errror.");
 		            String[] recipients = {
-		            	    "ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com","krishna.jaiswal@legitquest.com"
+		            	    "ghodake6896@gmail.com"
 		            	    
 		            	};
 

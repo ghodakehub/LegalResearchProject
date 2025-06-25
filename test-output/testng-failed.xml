@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.searchresultsofLR">
+      <class name="TestClass.ProfileTestsavedsearch">
         <methods>
+          <include name="verifyprofile"/>
           <include name="tearDown"/>
-          <include name="LRsearchResult"/>
           <include name="initializeBrowser"/>
         </methods>
-      </class> <!-- TestClass.searchresultsofLR -->
+      </class> <!-- TestClass.ProfileTestsavedsearch -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

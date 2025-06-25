@@ -82,9 +82,9 @@ public class VerifySearchResult extends BaseLib{
                 
                 ForMultiplemailReceipent.sendEmail(
                     driver,
-                    new String[]{"ghodake6896@gmail.com"},
-                    "LR Search Returned No Results",
-                    "Please check search results not working returned no results on LegitQuest.\nPlease verify manually.\nURL: " + driver.getCurrentUrl(),
+                    new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+                    "LR Search Result",
+                    "Please check search results not working returned no results on LR.\nPlease check attached screenshot and Url ",
                     screenshot,
                     driver.getCurrentUrl()
                 );
