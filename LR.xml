@@ -27,6 +27,8 @@
       <class name="TestClass.VerifyLegitquestWebsiteDown"/>
       <class name="TestClass.VerifyLibilWebsiteDown"/>
       <class name="TestClass.VerifyManagementToolWebsite"/>
+	<class name="TestClass.ProfileTestsavedsearch"/>
+	    
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
