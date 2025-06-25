@@ -17,7 +17,7 @@ public class BaseLib {
 
 	    @BeforeClass
 	    public void initializeBrowser() {
-	        System.setProperty("webdriver.chrome.driver", PathFile.driverpath);
+	       WebDriverManager.chromedriver().setup();
 
 	        ChromeOptions options = new ChromeOptions();
 	        options.addArguments("--remote-allow-origins=*");
