@@ -77,11 +77,10 @@
 </dependency>
 		
 		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>5.2.0</version>
-		</dependency>
-
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.7.0</version> <!-- Or latest -->
+</dependency>
 		
 		<dependency>
 			<groupId>commons-io</groupId>

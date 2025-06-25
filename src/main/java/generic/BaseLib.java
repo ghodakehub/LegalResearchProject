@@ -10,6 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import ConfigurationPath.PathFile;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseLib {
 	
@@ -17,10 +18,13 @@ public class BaseLib {
 
 	    @BeforeClass
 	    public void initializeBrowser() {
-	        System.setProperty("webdriver.chrome.driver", PathFile.driverpath);
-
+	        //System.setProperty("webdriver.chrome.driver", PathFile.driverpath);
+	    	WebDriverManager.chromedriver().setup();
 	        ChromeOptions options = new ChromeOptions();
 	        options.addArguments("--remote-allow-origins=*");
+	      //  options.addArguments("--headless");           // Run in headless mode
+	        options.addArguments("--disable-gpu");        // Optional but good for compatibility
+	       
 
 	        driver = new ChromeDriver(options);
 	        driver.manage().window().maximize();
