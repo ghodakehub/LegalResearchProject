@@ -2,9 +2,7 @@ package PomClass;
 
 import java.time.Duration;
 import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,14 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import com.aventstack.extentreports.ExtentTest;
-
-import UtilityClass.Library;
 import UtilityClass.UtilityClass;
-import generic.AllureListeners;
 import generic.BaseLib;
-import generic.EmailUtility;
 import generic.ForMultiplemailReceipent;
 
 public class VerifySearchResult extends BaseLib{
@@ -82,9 +74,10 @@ public class VerifySearchResult extends BaseLib{
                 
                 ForMultiplemailReceipent.sendEmail(
                     driver,
-                    new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
-                    "LR Search Result",
-                    "Please check search results not working returned no results on LR.\nPlease check attached screenshot and Url ",
+                    new String[]{"ghodake6896@gmail.com"},
+                    "LR Search Returned No Results",
+                    "Please check search results not working returned no results on LegitQuest.\nPlease check attached url and screenshot",
+
                     screenshot,
                     driver.getCurrentUrl()
                 );
