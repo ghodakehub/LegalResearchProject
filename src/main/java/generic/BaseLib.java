@@ -1,6 +1,7 @@
 package generic;
 
 import java.time.Duration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +10,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseLib {
 	
@@ -17,8 +17,11 @@ public class BaseLib {
 
 	    @BeforeClass
 	    public void initializeBrowser() {
+
 	        //System.setProperty("webdriver.chrome.driver", PathFile.driverpath);
 	    	WebDriverManager.chromedriver().setup();
+
+	       WebDriverManager.chromedriver().setup();
 	        ChromeOptions options = new ChromeOptions();
 	        options.addArguments("--remote-allow-origins=*");
 	      //  options.addArguments("--headless");           // Run in headless mode
