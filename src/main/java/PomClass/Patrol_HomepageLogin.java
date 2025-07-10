@@ -75,9 +75,9 @@ public class Patrol_HomepageLogin  {
             String screenshot = UtilityClass.Capaturescreenshot(driver, "Patrol_Login_Failure");
             ForMultiplemailReceipent.sendEmail(
                 driver,
-                new String[]{"ghodake6896@gmail.com", "mamta.kashyap@legitquest.com"},
-                "⚠️ Patrol Login Error Detected",
-                "Login was attempted, but a backend/server error was detected. Screenshot attached.\nURL: " + driver.getCurrentUrl(),
+                new String[]{"ghodake6896@gmail.com"},
+                "Patrol Login Error Detected",
+                "Please check Patrol is not working. Screenshot attached.\nURL: " + driver.getCurrentUrl(),
                 screenshot,
                 driver.getCurrentUrl()
             );

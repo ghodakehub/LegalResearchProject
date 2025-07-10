@@ -39,7 +39,7 @@ public class DashBoardTest extends BaseLib{
 		            	};
 
 		            EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients, 
-		            	    "Patrol Automation - Dashboard Page",
+		            	    "Patrol - Dashboard Page",
 		            	    "Please check issue coming on Patrol Dashboard page , see the attached screenshot for details", 
 		            	   Library.errorUrls, 
 		            	   Library. screenshotBytesList);

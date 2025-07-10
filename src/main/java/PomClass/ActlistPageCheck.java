@@ -34,7 +34,7 @@ public class ActlistPageCheck {
         actListButton.click();
 
         try {
-            // Step 1: Wait for loader (optional)
+            
             try {
                 shortWait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//img[contains(@src, 'lq-spin.gif')]")
@@ -43,17 +43,17 @@ public class ActlistPageCheck {
                 System.out.println("Loader did not appear — may have been skipped.");
             }
 
-            // Step 2: Wait for loader to disappear
+           
             wait.until(ExpectedConditions.invisibilityOfElementLocated(
                 By.xpath("//img[contains(@src, 'lq-spin.gif')]")
             ));
 
-            // ✅ Step 3: Wait for at least one act link to appear
+            
             WebElement firstActLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id='result']/tr[1]/td[1]/a")
             ));
 
-            // Step 4: Optionally log count of act links
+           
             List<WebElement> actLinks = driver.findElements(By.xpath("//*[@id='result']/tr/td[1]/a"));
             System.out.println("Act List page loaded with " + actLinks.size() + " act(s).");
 
@@ -66,13 +66,13 @@ public class ActlistPageCheck {
             ForMultiplemailReceipent.sendEmail(
                 driver,
                 recipients,
-                "Act List Page Load Issue",
-                "The Act List page failed to load act links. Screenshot attached.\nURL: " + driver.getCurrentUrl(),
+                "Act List Page",
+                "Please check issue coming on The Act List page failed to load act links. Screenshot attached.\nURL: " + driver.getCurrentUrl(),
                 screenshot,
                 driver.getCurrentUrl()
             );
 
-            Assert.fail("❌ Act List page failed to load with visible content. Exception: " + e.getMessage());
+            Assert.fail("Act List page failed to load with visible content. Exception: " + e.getMessage());
         }
     }
 }

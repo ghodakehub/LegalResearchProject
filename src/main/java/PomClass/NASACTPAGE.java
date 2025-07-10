@@ -25,13 +25,11 @@ public class NASACTPAGE {
             driver.get(testUrl);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-            // Give the page a moment to load content fully
-            Thread.sleep(3000); // Optional small delay if content loads slowly
-
+          
             String pageSource = driver.getPageSource().toLowerCase();
             String title = driver.getTitle().toLowerCase();
 
-            // ✅ Check for actual failure content
+          
             boolean isError = false;
 
             if (pageSource.contains("this site can’t be reached") ||
@@ -54,7 +52,7 @@ public class NASACTPAGE {
                     driver,
                     new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
                     "NAS Login Page Error Detected",
-                    "The NAS login page failed to load correctly. A possible server or SQL error has been detected. Please check the attached screenshot.\n\nURL: " + testUrl,
+                    "The NAS login page failed to load correctly. Please check the attached screenshot.\n\nURL: " + testUrl,
                     screenshot,
                     testUrl
                 );

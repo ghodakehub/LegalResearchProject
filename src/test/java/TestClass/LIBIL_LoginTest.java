@@ -54,7 +54,7 @@ public class LIBIL_LoginTest extends BaseLib{
 
 	        EmailUtility.sendSummaryEmailWithScreenshots(driver, recipients,
 	            "LIBIL ",
-	            "Please check error detected on LIBIL login page.\nPlease check the attached screenshot and url.",
+	            "Please check error detected on LIBIL .\nPlease check the attached screenshot and url.",
 	            urls,
 	            generic.Library.screenshotBytesList
 	        );

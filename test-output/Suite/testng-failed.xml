@@ -6,18 +6,22 @@
   </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="TestClass.LR_EditProfilePageTest">
+      <class name="TestClass.ProfileTestsavedsearch">
         <methods>
-          <include name="LR_EditProfile"/>
-          <include name="aftermethod"/>
-          <include name="launchbrowser"/>
+          <include name="verifyprofile"/>
+          <include name="tearDown"/>
+          <include name="cleanUpAfterTest"/>
+          <include name="initializeBrowser"/>
+          <include name="clearErrorData"/>
         </methods>
-      </class> <!-- TestClass.LR_EditProfilePageTest -->
+      </class> <!-- TestClass.ProfileTestsavedsearch -->
       <class name="TestClass.Lr_ChangePassTest">
         <methods>
-          <include name="launchbrowser"/>
+          <include name="tearDown"/>
+          <include name="cleanUpAfterTest"/>
+          <include name="initializeBrowser"/>
           <include name="LR_Changepassword"/>
-          <include name="aftermethod"/>
+          <include name="clearErrorData"/>
         </methods>
       </class> <!-- TestClass.Lr_ChangePassTest -->
     </classes>
