@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.LIBIL_LoginTest">
+      <class name="TestClass.LIBIL_Homepage">
         <methods>
           <include name="VerifyLoginPageOFLibil"/>
           <include name="tearDown"/>
           <include name="initializeBrowser"/>
+          <include name="cleanUpAfterTest"/>
+          <include name="clearErrorData"/>
         </methods>
-      </class> <!-- TestClass.LIBIL_LoginTest -->
+      </class> <!-- TestClass.LIBIL_Homepage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

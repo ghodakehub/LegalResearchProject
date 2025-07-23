@@ -74,7 +74,7 @@ public class VerifySearchResult extends BaseLib{
                 
                 ForMultiplemailReceipent.sendEmail(
                     driver,
-                    new String[]{"ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"},
+                    new String[]{"ghodake6896@gmail.com"},
                     "LR Search Returned No Results",
                     "Please check search results not working returned no results on LR.\nPlease check attached url and screenshot",
 

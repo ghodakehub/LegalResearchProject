@@ -1,6 +1,8 @@
 package PomClass;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -37,17 +39,23 @@ public class Profilesavedsearch {
 		        String pageSource = driver.getPageSource().toLowerCase();
 		        if (pageSource.contains("http 500") || pageSource.contains("this page isn’t working") || pageSource.contains("server error")) {
 
-		            
-		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR_PROFILE_Page_Error");
+		        	 byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+		 	        generic.AllureListeners.captureScreenshot(driver, "savebtn");
+
+		 	        
+		 	        generic.Library.errorUrls.add(driver.getCurrentUrl());
+		 	        generic.Library.screenshotBytesList.add(screenshotBytes);
+
+		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR_PROFILE_Page Error");
 
 		          
-		            String[] recipients = { "ghodake6896@gmail.com" };
+		            String[] recipients = { "ghodake6896@gmail.com"};
 
 		            EmailUtility.sendSummaryEmailWithScreenshots(
 		                driver,
 		                recipients,
 		                "LR - Profile Page",
-		                "Issue encountered when clicking on Saved Search button — the page throws error. Please find the attached screenshot.",
+		                "Issue coming when clicking on Saved Search button — the page throws error. Please find the attached screenshot.",
 		                generic.Library.errorUrls,
 		                generic.Library.screenshotBytesList
 		            );

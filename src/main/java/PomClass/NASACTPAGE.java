@@ -50,7 +50,7 @@ public class NASACTPAGE {
                 String screenshot = UtilityClass.Capaturescreenshot(driver, "NAS_Error");
                 ForMultiplemailReceipent.sendEmail(
                     driver,
-                    new String[]{"ghodake6896@gmail.com", "mamta.Kashyap@legitquest.com"},
+                    new String[]{"ghodake6896@gmail.com"},
                     "NAS Login Page Error Detected",
                     "The NAS login page failed to load correctly. Please check the attached screenshot.\n\nURL: " + testUrl,
                     screenshot,

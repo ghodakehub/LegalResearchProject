@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <listeners>
-    <listener class-name="generic.MyTestNGListener"/>
-  </listeners>
-  <test thread-count="5" name="Test(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TestClass.ProfileTestsavedsearch">
+      <class name="TestClass.LIBIL_Homepage">
         <methods>
-          <include name="verifyprofile"/>
+          <include name="VerifyLoginPageOFLibil"/>
           <include name="tearDown"/>
-          <include name="cleanUpAfterTest"/>
           <include name="initializeBrowser"/>
+          <include name="cleanUpAfterTest"/>
           <include name="clearErrorData"/>
         </methods>
-      </class> <!-- TestClass.ProfileTestsavedsearch -->
-      <class name="TestClass.Lr_ChangePassTest">
-        <methods>
-          <include name="tearDown"/>
-          <include name="cleanUpAfterTest"/>
-          <include name="initializeBrowser"/>
-          <include name="LR_Changepassword"/>
-          <include name="clearErrorData"/>
-        </methods>
-      </class> <!-- TestClass.Lr_ChangePassTest -->
+      </class> <!-- TestClass.LIBIL_Homepage -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

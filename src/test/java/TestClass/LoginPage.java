@@ -28,7 +28,7 @@ public class LoginPage extends BaseLib {
 		            System.out.println("Login page verificaiton");
 		            generic.AllureListeners.captureScreenshot(BaseLib.driver, "LR login page error");
 		            String[] recipients = {
-		            	    "ghodake6896@gmail.com","mamta.Kashyap@legitquest.com"
+		            	    "ghodake6896@gmail.com"
 		            	    
 		            	    
 		            	};
